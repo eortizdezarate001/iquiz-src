@@ -7,6 +7,7 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { HomePage } from '../pages/home/home';
 import { Login } from '../pages/login/login';
+import { FriendsPage } from '../pages/friends/friends';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -17,7 +18,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HomePage,
     Login,
-    SignUpPage
+    SignUpPage,
+    FriendsPage
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HomePage,
     Login,
-    SignUpPage
+    SignUpPage,
+    FriendsPage
   ],
   providers: [
     StatusBar,

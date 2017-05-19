@@ -40,7 +40,7 @@ export class Login {
     .map(res => res.json())
     .subscribe(data => {
       if(data.length == 0){
-        this.showError("Incorrect username or password.")
+        this.showError("Incorrect username or password.");
       } else{
         if( sha1(this.loginData.password) == data[0].password ){
           this.storage.set('loginUsername', data[0].username);
