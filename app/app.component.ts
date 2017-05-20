@@ -3,10 +3,10 @@ import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-
-import { FriendsPage } from '../pages/friends/friends';
 import { HomePage } from '../pages/home/home';
 import { Login } from '../pages/login/login';
+import { FriendsPage } from '../pages/friends/friends';
+import { RankingPage } from '../pages/ranking/ranking';
 
 
 @Component({
@@ -18,6 +18,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
+
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -26,18 +27,20 @@ export class MyApp {
       splashScreen.hide();
     });
 
-        // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'Friends', component: FriendsPage },
-      { title: 'Ranking', component: HomePage },
-      { title: 'Logout', component: HomePage }
+      { title: 'Ranking', component: RankingPage }
     ];
   }
 
-    openPage(page) {
+  openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  logout(){
+    this.nav.setRoot(Login);
   }
 }

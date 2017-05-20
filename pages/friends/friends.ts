@@ -25,18 +25,14 @@ export class FriendsPage {
 		});
 		console.log('ionViewDidLoad FriendsPage');
 		this.fillList();
-
-
 	}
 
 	fillList(){
 		this.friends = [];
 		this.storage.get('loginUsername').then((usuario) => {
-			console.log("USERNAME:" + usuario);
 			this.http.get('http://iquiz.x10.bz/get-user.php?key=friend&user=' + usuario)
 			.map(res => res.json())
 			.subscribe(data => {
-				console.log(data);
 				if(data.length == 0){
 					console.log('You have no friends.');
 				} else{
@@ -66,8 +62,6 @@ export class FriendsPage {
 					});
 					toast.present();
 					this.removeFriend(friend);
-
-
 				} else{
 					let toast = this.toastCtrl.create({
 						message: "Your friend could not be deleted.",
@@ -76,7 +70,6 @@ export class FriendsPage {
 					toast.present();
 				}
 			}, error => this.showError('Unknown error.') );
-
 		});
 
 	}
@@ -92,7 +85,6 @@ export class FriendsPage {
 
 	removeFriend(friend){
 		let index = this.friends.indexOf(friend);
-
 		if(index > -1){
 			this.friends.splice(index, 1);
 		}

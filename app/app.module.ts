@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { Login } from '../pages/login/login';
 import { FriendsPage } from '../pages/friends/friends';
 import { SignUpPage } from '../pages/sign-up/sign-up';
+import { RankingPage } from '../pages/ranking/ranking';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -19,7 +20,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     Login,
     SignUpPage,
-    FriendsPage
+    FriendsPage,
+    RankingPage
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     Login,
     SignUpPage,
-    FriendsPage
+    FriendsPage,
+    RankingPage
   ],
   providers: [
     StatusBar,

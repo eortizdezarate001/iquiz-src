@@ -18,8 +18,8 @@ export class Login {
   loginData = {username: '', password: ''};
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public loadingCtrl: LoadingController, public alertCtrl: AlertController, 
-              public http: Http, public storage: Storage, public menu: MenuController) {  
+              public loadingCtrl: LoadingController, public alertCtrl: AlertController,
+              public http: Http, public storage: Storage, public menu: MenuController) {
 
   }
 
@@ -27,7 +27,7 @@ export class Login {
     this.storage.set('loginUsername', '');
     this.storage.set('loginPoints', '');
     this.storage.set('auth', false);
-    this.menu.swipeEnable(false,'menu');
+    this.menu.swipeEnable(false,'menu');  
   }
 
   public signUp() {
