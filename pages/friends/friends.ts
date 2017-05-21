@@ -37,14 +37,11 @@ export class FriendsPage {
 					console.log('You have no friends.');
 				} else{
 					for (let f of data){
-						console.log(f);
 						let friend = {username: f.username, points: f.points, status: f.status, avatar: f.avatar};
-						console.log(friend);
 						this.friends.push(friend);
 					}
 				}
 			}, error => this.showError('Unknown error.') );
-
 		});
 
 	}
@@ -54,10 +51,9 @@ export class FriendsPage {
 			this.http.get('http://iquiz.x10.bz/manage-user.php?key=deleteFriend&user=' + usuario + '&friend=' + friend.username)
 			.map(res => res.json())
 			.subscribe(data => {
-				console.log(data);
 				if(data.message == 'success'){
 					let toast = this.toastCtrl.create({
-						message: "Your friend was successfully deleted.",
+						message: friend.username + " and you are no longer friends.",
 						duration: 3000
 					});
 					toast.present();
@@ -71,7 +67,6 @@ export class FriendsPage {
 				}
 			}, error => this.showError('Unknown error.') );
 		});
-
 	}
 
 	showError(text) {

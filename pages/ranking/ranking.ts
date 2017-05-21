@@ -13,7 +13,7 @@ import { Login } from '../login/login';
 })
 export class RankingPage {
 
-  ranking: Array <{username: string, points: number, status: string, isSelf: boolean, isFriend: boolean}> = [];
+  ranking: Array <{index: number, username: string, points: number, status: string, isSelf: boolean, isFriend: boolean}> = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public http: Http, public alertCtrl: AlertController, public toastCtrl  : ToastController) {
   }
@@ -35,8 +35,10 @@ export class RankingPage {
 				if(data.length == 0){
 					console.log('There aren\'t any users in the database.');
 				} else{
+          let i : number = 1;
 					for (let u of data){
-						let user = {username: u.username, points: u.points, status: u.status, isSelf: false, isFriend: false};
+						let user = {index: i, username: u.username, points: u.points, status: u.status, isSelf: false, isFriend: false};
+            i++;
 
             this.storage.get('loginUsername').then((usuario) => {
 
@@ -61,17 +63,18 @@ export class RankingPage {
 			}, error => this.showError('Unknown error.') );
 	}
 
-	/*deleteFriend(friend){
+	deleteFriend(friend){
 		this.storage.get('loginUsername').then((usuario) => {
 			this.http.get('http://iquiz.x10.bz/manage-user.php?key=deleteFriend&user=' + usuario + '&friend=' + friend.username)
 			.map(res => res.json())
 			.subscribe(data => {
 				if(data.message == 'success'){
 					let toast = this.toastCtrl.create({
-						message: "Your friend was successfully deleted.",
+						message: friend.username + " and you are no longer friends.",
 						duration: 3000
 					});
 					toast.present();
+          friend.isFriend = false;
 				} else{
 					let toast = this.toastCtrl.create({
 						message: "Your friend could not be deleted.",
@@ -81,9 +84,34 @@ export class RankingPage {
 				}
 			}, error => this.showError('Unknown error.') );
 		});
-  }*/
+  }
 
+  addFriend(friend){
+    this.storage.get('loginUsername').then((usuario) => {
+			this.http.get('http://iquiz.x10.bz/manage-user.php?key=addFriend&user=' + usuario + '&friend=' + friend.username)
+			.map(res => res.json())
+			.subscribe(data => {
+				if(data.message == 'success'){
+					let toast = this.toastCtrl.create({
+						message: friend.username + " and you are now friends.",
+						duration: 3000
+					});
+					toast.present();
+          friend.isFriend = true;
+				} else{
+					let toast = this.toastCtrl.create({
+						message: "This user could not be added as a friend.",
+						duration: 3000
+					});
+					toast.present();
+				}
+			}, error => this.showError('Unknown error.') );
+		});
+  }
 
+  settings() {
+
+  }
 
   showError(text) {
 		let alert = this.alertCtrl.create({

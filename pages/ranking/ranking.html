@@ -12,29 +12,33 @@
 <ion-list>
 	<ion-item-sliding *ngFor ="let user of ranking">
 		<ion-item>
-	      <!--<ion-avatar item-left>
-	        <img src="{{friend.avatar}}">
-	      </ion-avatar>-->
+	      <ion-avatar item-left>
+	        <h1> &nbsp; {{user.index}}</h1>
+	      </ion-avatar>
 	      <h2>{{user.username}}</h2>
-	      <h3>{{user.points}} points</h3>
 	      <p>{{user.status}}</p>
+        <ion-note item-end>{{user.points}} points</ion-note>
 	    </ion-item>
-      <!--<div *ngIf="!user.isSelf">-->
-  	    <ion-item-options side="right">
-          <div *ngIf="user.isFriend == true">
-    	      <button ion-button color="danger" (click)="deleteFriend(friend)">
-    	        <ion-icon name="trash"></ion-icon>
-    	        Delete friend
-    	      </button>
-          </div>
-          <div *ngIf="user.isFriend == false && user.isSelf == false">
-            <button ion-button color="secondary" (click)="addFriend(friend)">
-    	        <ion-icon name="add"></ion-icon>
-    	        Add friend
-    	      </button>
-          </div>
-  	    </ion-item-options>
-      <!--</div>-->
+	    <ion-item-options side="right">
+        <div *ngIf="user.isFriend">
+  	      <button ion-button color="danger" (click)="deleteFriend(user)">
+  	        <ion-icon name="trash"></ion-icon>
+  	        Delete friend
+  	      </button>
+        </div>
+        <div *ngIf="!user.isFriend && !user.isSelf">
+          <button ion-button color="secondary" (click)="addFriend(user)">
+  	        <ion-icon name="add"></ion-icon>
+  	        Add friend
+  	      </button>
+        </div>
+        <div *ngIf="user.isSelf">
+          <button ion-button color="light" (click)="settings()">
+  	        <ion-icon name="settings"></ion-icon>
+  	        Settings
+  	      </button>
+        </div>
+	    </ion-item-options>
 	</ion-item-sliding>
 </ion-list>
 
