@@ -8,7 +8,12 @@
 </ion-header>
 
 <ion-content>
-<ion-searchbar></ion-searchbar>
+<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+
+<div align="center" *ngIf="searching" class="spinner-container">
+    <ion-spinner></ion-spinner>
+</div>
+ 
 <ion-list>
 	<ion-item-sliding *ngFor ="let friend of friends">
 		<ion-item>

@@ -14,6 +14,7 @@ import { Login } from '../login/login';
 export class FriendsPage {
 
 	friends: Array <{username: string, points: number, status: string, avatar: string}> = [];
+	allFriends: Array <{username: string, points: number, status: string, avatar: string}> = [];
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public http: Http, public alertCtrl: AlertController, public toastCtrl  : ToastController) {
 	}
@@ -25,10 +26,10 @@ export class FriendsPage {
 		});
 		console.log('ionViewDidLoad FriendsPage');
 		this.fillList();
+		this.getAllFriends();
 	}
 
 	fillList(){
-		this.friends = [];
 		this.storage.get('loginUsername').then((usuario) => {
 			this.http.get('http://iquiz.x10.bz/get-user.php?key=friend&user=' + usuario)
 			.map(res => res.json())
@@ -36,6 +37,7 @@ export class FriendsPage {
 				if(data.length == 0){
 					console.log('You have no friends.');
 				} else{
+					this.friends = [];
 					for (let f of data){
 						let friend = {username: f.username, points: f.points, status: f.status, avatar: f.avatar};
 						this.friends.push(friend);
@@ -85,4 +87,36 @@ export class FriendsPage {
 		}
 	}
 
+	//SEARCH
+
+	getItems(ev){
+
+		var val = ev.target.value;
+
+		if(val == '')
+			this.fillList();
+
+		if(val && val.trim() != ''){
+			this.friends = this.allFriends.filter((item) => {
+				return (item.username.toLowerCase().indexOf(val.toLowerCase()) > -1);
+			});
+		}
+	}
+
+	getAllFriends(){
+		this.storage.get('loginUsername').then((usuario) => {
+			this.http.get('http://iquiz.x10.bz/get-user.php?key=friend&user=' + usuario)
+			.map(res => res.json())
+			.subscribe(data => {
+				if(data.length == 0){
+					console.log('You have no friends.');
+				} else{
+					for (let f of data){
+						let friend = {username: f.username, points: f.points, status: f.status, avatar: f.avatar};
+						this.allFriends.push(friend);
+					}
+				}
+			}, error => this.showError('Unknown error.') );
+		});
+	}
 }
