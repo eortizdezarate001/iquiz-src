@@ -13,7 +13,6 @@ import { RankingPage } from '../pages/ranking/ranking';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { DataProvider } from '../providers/data/data';
 
 @NgModule({
   declarations: [
@@ -43,7 +42,6 @@ import { DataProvider } from '../providers/data/data';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DataProvider,
   ]
 })
 export class AppModule {}

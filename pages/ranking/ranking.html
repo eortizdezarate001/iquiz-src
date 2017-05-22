@@ -15,7 +15,8 @@
 	      <ion-avatar item-left>
 	        <h1> &nbsp; {{user.index}}</h1>
 	      </ion-avatar>
-	      <h2>{{user.username}}</h2>
+        <div *ngIf="user.isSelf"><h2><strong>{{user.username}}</strong></h2></div>
+        <div *ngIf="!user.isSelf"><h2>{{user.username}}</h2></div>
 	      <p>{{user.status}}</p>
         <ion-note item-end>{{user.points}} points</ion-note>
 	   </ion-item>
