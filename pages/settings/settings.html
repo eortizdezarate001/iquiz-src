@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item-divider>Change</ion-item-divider>
+    <button ion-item *ngFor="let item of settings" (click)="open(item.id)">
+      <ion-icon name="{{item.icon}}" item-left></ion-icon>
+      {{item.name}}
+    </button>
+  </ion-list>
+</ion-content>
