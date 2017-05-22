@@ -20,7 +20,6 @@ export class SignUpPage {
 	}
 
   ionViewDidLoad() {
-    this.menu.swipeEnable(false,'menu');
   }
 
 	public register(){

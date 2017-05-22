@@ -27,7 +27,7 @@ export class Login {
     this.storage.set('loginUsername', '');
     this.storage.set('loginPoints', '');
     this.storage.set('auth', false);
-    this.menu.swipeEnable(false,'menu');  
+    this.menu.swipeEnable(false,'menu');
   }
 
   public signUp() {
@@ -46,6 +46,7 @@ export class Login {
           this.storage.set('loginUsername', data[0].username);
           this.storage.set('loginPoints', data[0].points);
           this.storage.set('auth', true);
+          this.menu.swipeEnable(true,'menu');  
           this.navCtrl.setRoot(HomePage);
         } else this.showError("Incorrect username or password.");
       }
