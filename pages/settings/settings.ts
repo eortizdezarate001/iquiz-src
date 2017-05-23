@@ -22,7 +22,7 @@ export class Settings {
     {name: "Password", icon: "lock", id: 'p'}
   ];
 
-  settingsData = {avatar: '', status: '', password: ''};
+  settingsData = {avatar: '', status: ''};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,
               public storage: Storage, public http: Http) {
@@ -35,13 +35,12 @@ export class Settings {
   loadData() {
     this.storage.get('loginStatus').then((status) => this.settingsData.status = status);
     this.storage.get('loginAvatar').then((avatar) => this.settingsData.avatar = avatar);
-    this.storage.get('loginPassword').then((pass) => this.settingsData.password = pass);
   }
 
   open(id){
     switch(id){
       case 'a':
-        let modalA = this.modalCtrl.create(ModalAvatar, this.settingsData.avatar);
+        let modalA = this.modalCtrl.create(ModalAvatar, {avatar: this.settingsData.avatar});
         modalA.present();
         break;
       case 's':
@@ -52,10 +51,7 @@ export class Settings {
         modalS.present();
         break;
       case 'p':
-        let modalP = this.modalCtrl.create(ModalPassword, {pass: this.settingsData.password});
-        modalS.onDidDismiss(data => {
-          this.loadData();
-        });
+        let modalP = this.modalCtrl.create(ModalPassword);
         modalP.present();
         break;
     }

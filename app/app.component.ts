@@ -20,6 +20,9 @@ export class MyApp {
 
   pages: Array<{title: string, component: any, isHome: boolean}>;
 
+  username: string;
+  public avatar: string;
+
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public storage: Storage) {
 
     this.storage.get('auth').then((auth) => {
@@ -27,6 +30,14 @@ export class MyApp {
         this.rootPage = HomePage;
       else
         this.rootPage = Login;
+    });
+
+    this.storage.get('loginUsername').then((usern) => {
+      this.username = usern;
+    })
+
+    this.storage.get('loginAvatar').then((avi) => {
+      this.avatar = avi;
     });
 
     platform.ready().then(() => {
@@ -60,4 +71,9 @@ export class MyApp {
     this.storage.set('auth', false);
     this.nav.setRoot(Login);
   }
+
+  public changeAvatar(avi){
+    this.avatar = avi;
+  }
+
 }

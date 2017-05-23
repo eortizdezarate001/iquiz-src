@@ -33,7 +33,8 @@ import 'rxjs/add/operator/map';
 export class ModalStatus {
   status: string;
 
-  constructor(public params: NavParams, public viewCtrl: ViewController, public storage: Storage, public http: Http, public toastCtrl: ToastController) {
+  constructor(public params: NavParams, public viewCtrl: ViewController, public storage: Storage, 
+              public http: Http, public toastCtrl: ToastController) {
 
   }
 

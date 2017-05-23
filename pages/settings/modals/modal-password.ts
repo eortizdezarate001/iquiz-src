@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, ViewController, ToastController } from 'ionic-angular';
+import { NavParams, ViewController, ToastController, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -44,34 +44,46 @@ export class ModalPassword {
   newPass1: string;
   newPass2: string;
 
-  constructor(public params: NavParams, public viewCtrl: ViewController, public storage: Storage, public http: Http, public toastCtrl: ToastController){
+  constructor(public params: NavParams, public viewCtrl: ViewController, public storage: Storage,
+              public http: Http, public toastCtrl: ToastController, public alertCtrl: AlertController){
 
-  }
-
-  ionViewWillEnter() {
-    this.oldPass = this.params.get('pass');
   }
 
   save() {
-    this.storage.get('loginUsername').then((user) => {
-      /*this.http.get('http://iquiz.x10.bz/manage-user.php?key=updateStatus&username=' + user + '&status=' + this.status)
-      .map(res => res.json())
-      .subscribe(data => {
-        if(data.message === 'success'){
-          this.storage.set('loginStatus', this.status);
-          let toast = this.toastCtrl.create({
-						message: "Your status was successfully changed.",
-						duration: 3000
-					});
-					toast.present();
-          this.viewCtrl.dismiss();
-        }
-      });*/
-    });
+    if(this.newPass1 === this.newPass2){
+      this.storage.get('loginUsername').then((user) => {
+        this.http.get('http://iquiz.x10.bz/manage-user.php?key=updatePassword&username=' + user + '&oldpassword=' + this.oldPass + '&newpassword=' + this.newPass1)
+        .map(res => res.json())
+        .subscribe(data => {
+          if(data.message === 'success'){
+            this.storage.set('loginPassword', data.pass);
+            let toast = this.toastCtrl.create({
+  						message: "Your password was successfully changed.",
+  						duration: 3000
+  					});
+  					toast.present();
+            this.viewCtrl.dismiss();
+          } else if (data.message === 'passerror'){
+            this.showError("The password you entered is incorrect.");
+          }
+        });
+      });
+    } else {
+      this.showError("Passwords don't match.");
+    }
   }
 
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  showError(text) {
+    let alert = this.alertCtrl.create({
+      title: 'Error',
+      subTitle: text,
+      buttons: ['OK']
+    });
+    alert.present(prompt);
   }
 
 

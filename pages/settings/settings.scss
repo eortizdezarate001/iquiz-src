@@ -1,3 +1,26 @@
 page-settings {
 
 }
+
+.avatar-model{
+  div {
+    text-align: center;
+  }
+
+  div > label {
+    cursor: pointer;
+  }
+
+  div > label > input {
+    visibility: hidden;
+  }
+
+  div > label > input:not(:checked) + img {
+    border: 5px solid transparent;
+  }
+
+  div > label > input:checked + img {
+    border: 5px solid black;
+    border-radius: 10px;
+  }
+}
