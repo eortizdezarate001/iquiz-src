@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Storage } from '@ionic/storage';
 
 import { HomePage } from '../pages/home/home';
 import { Login } from '../pages/login/login';
@@ -15,11 +16,19 @@ import { Settings } from '../pages/settings/settings';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage:any = Login;
+  rootPage:any;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any, isHome: boolean}>;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public storage: Storage) {
+
+    this.storage.get('auth').then((auth) => {
+      if(auth)
+        this.rootPage = HomePage;
+      else
+        this.rootPage = Login;
+    });
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -28,20 +37,27 @@ export class MyApp {
     });
 
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'Friends', component: FriendsPage },
-      { title: 'Ranking', component: RankingPage },
-      { title: 'Settings', component: Settings}
+      { title: 'Home', component: HomePage, isHome : true },
+      { title: 'Friends', component: FriendsPage, isHome: false },
+      { title: 'Ranking', component: RankingPage, isHome: false },
+      { title: 'Settings', component: Settings, isHome: false}
     ];
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    if(page.isHome)
+      this.nav.setRoot(page.component, {through: false});
+    else
+      this.nav.setRoot(HomePage, {through: true, component: page.component});
   }
 
   logout(){
+    this.storage.set('loginUsername', '');
+    this.storage.set('loginPassword', '');
+    this.storage.set('loginPoints', '');
+    this.storage.set('loginStatus', '');
+    this.storage.set('loginAvatar', '');
+    this.storage.set('auth', false);
     this.nav.setRoot(Login);
   }
 }

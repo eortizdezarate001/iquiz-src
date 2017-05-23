@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -13,7 +13,7 @@
 <div align="center" *ngIf="searching" class="spinner-container">
     <ion-spinner></ion-spinner>
 </div>
- 
+
 <ion-list>
 	<ion-item-sliding *ngFor ="let friend of friends">
 		<ion-item>

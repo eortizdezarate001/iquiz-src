@@ -25,8 +25,11 @@ export class FriendsPage {
 				this.navCtrl.setRoot(Login);
 		});
 		console.log('ionViewDidLoad FriendsPage');
-		this.fillList();
 		this.getAllFriends();
+	}
+
+	ionViewDidEnter() {
+		this.fillList();
 	}
 
 	fillList(){

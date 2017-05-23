@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Login } from '../login/login';
+import { Settings } from '../settings/settings';
 
 
 @IonicPage()
@@ -24,12 +25,15 @@ export class RankingPage {
 				this.navCtrl.setRoot(Login);
 		});
 		console.log('ionViewDidLoad RankingPage');
-		this.fillList();
 		this.getAllRanking();
 	}
 
+	ionViewDidEnter() {
+    this.fillList();
+  }
+
 	fillList(){
-		
+
 		this.http.get('http://iquiz.x10.bz/get-user.php?key=ranking')
 		.map(res => res.json())
 		.subscribe(data => {
@@ -112,7 +116,7 @@ export class RankingPage {
 	}
 
 	settings() {
-
+		this.navCtrl.push(Settings);
 	}
 
 	showError(text) {

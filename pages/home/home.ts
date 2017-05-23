@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Login } from '../login/login';
 
@@ -9,11 +9,14 @@ import { Login } from '../login/login';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public storage: Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
 
   }
 
   ionViewDidLoad() {
+    if(this.navParams.get('through')){
+      this.navCtrl.push(this.navParams.get('component'));
+    }
     this.storage.get('auth').then((auth) => {
       if(auth === false)
         this.navCtrl.setRoot(Login);

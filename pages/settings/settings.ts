@@ -5,9 +5,9 @@ import { Storage } from '@ionic/storage';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import { ModalAvatar } from './modal-avatar/modal-avatar';
-import { ModalStatus } from './modal-status/modal-status';
-import { ModalPassword } from './modal-password/modal-password';
+import { ModalAvatar } from './modals/modal-avatar';
+import { ModalStatus } from './modals/modal-status';
+import { ModalPassword } from './modals/modal-password';
 
 @IonicPage()
 @Component({
@@ -28,16 +28,14 @@ export class Settings {
               public storage: Storage, public http: Http) {
   }
 
-  ionViewDidLoad() {
-    this.storage.get('loginUsername').then((user) => {
-      this.http.get('http://iquiz.x10.bz/get-user.php?key=username&user=' + user)
-      .map(res => res.json())
-      .subscribe(data => {
-        this.settingsData.avatar = data[0].avatar;
-        this.settingsData.status = data[0].status;
-        this.settingsData.password = data[0].password;
-      });
-    });
+  ionViewWillEnter(){
+    this.loadData();
+  }
+
+  loadData() {
+    this.storage.get('loginStatus').then((status) => this.settingsData.status = status);
+    this.storage.get('loginAvatar').then((avatar) => this.settingsData.avatar = avatar);
+    this.storage.get('loginPassword').then((pass) => this.settingsData.password = pass);
   }
 
   open(id){
@@ -48,11 +46,16 @@ export class Settings {
         break;
       case 's':
         let modalS = this.modalCtrl.create(ModalStatus, {status: this.settingsData.status});
-        modalS.onDidDismiss(modalStatus => this.settingsData.status = modalStatus);
+        modalS.onDidDismiss(data => {
+          this.loadData();
+        });
         modalS.present();
         break;
       case 'p':
-        let modalP = this.modalCtrl.create(ModalPassword, this.settingsData.password);
+        let modalP = this.modalCtrl.create(ModalPassword, {pass: this.settingsData.password});
+        modalS.onDidDismiss(data => {
+          this.loadData();
+        });
         modalP.present();
         break;
     }

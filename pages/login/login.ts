@@ -24,9 +24,6 @@ export class Login {
   }
 
   ionViewDidLoad() {
-    this.storage.set('loginUsername', '');
-    this.storage.set('loginPoints', '');
-    this.storage.set('auth', false);
     this.menu.swipeEnable(false,'menu');
   }
 
@@ -44,9 +41,12 @@ export class Login {
       } else{
         if( sha1(this.loginData.password) == data[0].password ){
           this.storage.set('loginUsername', data[0].username);
+          this.storage.set('loginPassword', data[0].password)
           this.storage.set('loginPoints', data[0].points);
+          this.storage.set('loginStatus', data[0].status);
+          this.storage.set('loginAvatar', data[0].avatar);
           this.storage.set('auth', true);
-          this.menu.swipeEnable(true,'menu');  
+          this.menu.swipeEnable(true,'menu');
           this.navCtrl.setRoot(HomePage);
         } else this.showError("Incorrect username or password.");
       }

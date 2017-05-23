@@ -12,9 +12,9 @@ import { SignUpPage } from '../pages/sign-up/sign-up';
 import { RankingPage } from '../pages/ranking/ranking';
 import { Settings } from '../pages/settings/settings';
 
-import { ModalAvatar } from '../pages/settings/modal-avatar/modal-avatar';
-import { ModalStatus } from '../pages/settings/modal-status/modal-status';
-import { ModalPassword } from '../pages/settings/modal-password/modal-password';
+import { ModalAvatar } from '../pages/settings/modals/modal-avatar';
+import { ModalStatus } from '../pages/settings/modals/modal-status';
+import { ModalPassword } from '../pages/settings/modals/modal-password';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';

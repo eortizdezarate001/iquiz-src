@@ -5,7 +5,30 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Component({
-  templateUrl: 'modal-status.html'
+  template: `
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>
+          Change your status
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content padding>
+      <ion-list>
+        <ion-item>
+          <ion-input [(ngModel)]="status"></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+
+    <ion-footer>
+      <ion-toolbar>
+          <button style="width: 48%" ion-button color="dark" clear (click)="dismiss()">Cancel</button>
+          <button style="width: 48%" ion-button color="dark" clear (click)="save()">Save</button>
+      </ion-toolbar>
+    </ion-footer>
+  `
 })
 export class ModalStatus {
   status: string;
@@ -14,7 +37,7 @@ export class ModalStatus {
 
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.status = this.params.get('status');
   }
 
@@ -24,12 +47,13 @@ export class ModalStatus {
       .map(res => res.json())
       .subscribe(data => {
         if(data.message === 'success'){
+          this.storage.set('loginStatus', this.status);
           let toast = this.toastCtrl.create({
 						message: "Your status was successfully changed.",
 						duration: 3000
 					});
 					toast.present();
-          this.viewCtrl.dismiss(this.status);
+          this.viewCtrl.dismiss();
         }
       });
     });
