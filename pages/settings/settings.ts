@@ -41,6 +41,9 @@ export class Settings {
     switch(id){
       case 'a':
         let modalA = this.modalCtrl.create(ModalAvatar, {avatar: this.settingsData.avatar});
+        modalA.onDidDismiss(data => {
+          this.loadData();
+        });
         modalA.present();
         break;
       case 's':

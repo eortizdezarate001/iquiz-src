@@ -20,29 +20,47 @@ import 'rxjs/add/operator/map';
           <ion-col>
             <div tappable (click)="select(avatars[0])">
               <label>
-                <input type="radio" name="avatar" value="default0" checked/>
+                <input type="radio" name="avatar" value="{{avatars[0].name}}" checked="{{avatars[0].checked}}"/>
                 <img width="100" [src]="avatars[0].src"/>
               </label>
             </div>
           </ion-col>
         </ion-row>
         <ion-row>
-        <ion-col>
-          <div tappable (click)="select(avatars[1])">
-            <label>
-              <input type="radio" name="avatar" value="default1" />
-              <img width="100" [src]="avatars[1].src"/>
-            </label>
-          </div>
-        </ion-col>
-        <ion-col>
-          <div tappable (click)="select(avatars[2])">
-            <label>
-              <input type="radio" name="avatar" value="default2" />
-              <img width="100" [src]="avatars[2].src"/>
-            </label>
-          </div>
-        </ion-col>
+          <ion-col>
+            <div tappable (click)="select(avatars[1])">
+              <label>
+                <input type="radio" name="avatar" value="{{avatars[1].name}}" checked="{{avatars[1].checked}}"/>
+                <img width="100" [src]="avatars[1].src"/>
+              </label>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div tappable (click)="select(avatars[2])">
+              <label>
+                <input type="radio" name="avatar" value="{{avatars[2].name}}" checked="{{avatars[2].checked}}"/>
+                <img width="100" [src]="avatars[2].src"/>
+              </label>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div tappable (click)="select(avatars[3])">
+              <label>
+                <input type="radio" name="avatar" value="{{avatars[3].name}}" checked="{{avatars[3].checked}}"/>
+                <img width="100" [src]="avatars[3].src"/>
+              </label>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div tappable (click)="select(avatars[4])">
+              <label>
+                <input type="radio" name="avatar" value="{{avatars[4].name}}" checked="{{avatars[4].checked}}"/>
+                <img width="100" [src]="avatars[4].src"/>
+              </label>
+            </div>
+          </ion-col>
         </ion-row>
       </ion-grid>
     </ion-content>
@@ -56,15 +74,15 @@ import 'rxjs/add/operator/map';
   `
 })
 export class ModalAvatar {
-
+  currentAvatar: any;
   selectedAvatar: any;
 
   avatars = [
-    {name: "default", src: "http://iquiz.x10.bz/avatars/default.png"},
-    {name: "default1", src: "http://iquiz.x10.bz/avatars/default.png"},
-    {name: "default2", src: "http://iquiz.x10.bz/avatars/default.png"},
-    {name: "default3", src: "http://iquiz.x10.bz/avatars/default.png"},
-    {name: "default4", src: "http://iquiz.x10.bz/avatars/default.png"},
+    {name: "default", src: "http://iquiz.x10.bz/avatars/default.png", checked: false},
+    {name: "mario", src: "http://iquiz.x10.bz/avatars/mario.png", checked: false},
+    {name: "pikachu", src: "http://iquiz.x10.bz/avatars/pikachu.png", checked: false},
+    {name: "link", src: "http://iquiz.x10.bz/avatars/link.jpg", checked: false},
+    {name: "sonic", src: "http://iquiz.x10.bz/avatars/sonic.jpg", checked: false},
   ]
 
   constructor(public params: NavParams, public viewCtrl: ViewController, public storage: Storage,
@@ -72,16 +90,41 @@ export class ModalAvatar {
 
   }
 
+  ionViewWillEnter() {
+    let currentAvatarURL = this.params.get('avatar');
+    for(let avi of this.avatars){
+      if(avi.src === currentAvatarURL){
+        this.selectedAvatar = avi;
+        this.currentAvatar = avi;
+        avi.checked = true;
+      }
+    }
+  }
+
   select(av) {
     this.selectedAvatar = av;
   }
 
   save() {
-    console.log(this.selectedAvatar);
-    /* datubase update avatar
-    this.http..... */
-    this.storage.set('loginAvatar', this.selectedAvatar.src);
-    this.viewCtrl.dismiss();
+    if(this.selectedAvatar.name === this.currentAvatar.name){
+      this.viewCtrl.dismiss();
+    } else {
+      this.storage.get('loginUsername').then((user) => {
+        this.http.get('http://iquiz.x10.bz/manage-user.php?key=updateAvatar&username=' + user + '&avatar=' + this.selectedAvatar.src)
+        .map(res => res.json())
+        .subscribe(data => {
+          if(data.message === 'success'){
+            this.storage.set('loginAvatar', this.selectedAvatar.src);
+            let toast = this.toastCtrl.create({
+  						message: "Your avatar was successfully changed.",
+  						duration: 3000
+  					});
+  					toast.present();
+            this.viewCtrl.dismiss();
+          }
+        });
+      });
+    }
   }
 
   dismiss() {

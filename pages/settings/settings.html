@@ -12,7 +12,10 @@
   <ion-list>
     <ion-item-divider>Change</ion-item-divider>
     <button ion-item *ngFor="let item of settings" (click)="open(item.id)">
-      <ion-icon name="{{item.icon}}" item-left></ion-icon>
+      <ion-avatar item-left *ngIf="item.id === 'a'">
+        <img src="{{settingsData.avatar}}">
+      </ion-avatar>
+      <ion-icon name="{{item.icon}}" *ngIf="item.id !== 'a'" item-left></ion-icon>
       {{item.name}}
       <p *ngIf="item.id === 's'">{{settingsData.status}}</p>
       <p *ngIf="item.id === 'p'">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</p>

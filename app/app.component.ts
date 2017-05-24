@@ -34,7 +34,7 @@ export class MyApp {
 
     this.storage.get('loginUsername').then((usern) => {
       this.username = usern;
-    })
+    });
 
     this.storage.get('loginAvatar').then((avi) => {
       this.avatar = avi;
@@ -55,6 +55,11 @@ export class MyApp {
     ];
   }
 
+  update(){
+    this.storage.get('loginUsername').then((usern) => this.username = usern);
+    this.storage.get('loginAvatar').then((avi) => this.avatar = avi);
+  }
+
   openPage(page) {
     if(page.isHome)
       this.nav.setRoot(page.component, {through: false});
@@ -70,10 +75,6 @@ export class MyApp {
     this.storage.set('loginAvatar', '');
     this.storage.set('auth', false);
     this.nav.setRoot(Login);
-  }
-
-  public changeAvatar(avi){
-    this.avatar = avi;
   }
 
 }
