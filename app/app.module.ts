@@ -10,11 +10,16 @@ import { Login } from '../pages/login/login';
 import { FriendsPage } from '../pages/friends/friends';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { RankingPage } from '../pages/ranking/ranking';
-import { Settings } from '../pages/settings/settings';
 
+import { Settings } from '../pages/settings/settings';
 import { ModalAvatar } from '../pages/settings/modals/modal-avatar';
 import { ModalStatus } from '../pages/settings/modals/modal-status';
 import { ModalPassword } from '../pages/settings/modals/modal-password';
+
+import { MyQuestions } from '../pages/my-questions/my-questions';
+import { AllMyQuestions } from '../pages/my-questions/tabs/all';
+import { ApprovedQuestions } from '../pages/my-questions/tabs/approved';
+import { NotApprovedQuestions } from '../pages/my-questions/tabs/notapproved';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -30,7 +35,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Settings,
     ModalAvatar,
     ModalStatus,
-    ModalPassword
+    ModalPassword,
+    MyQuestions,
+    AllMyQuestions,
+    ApprovedQuestions,
+    NotApprovedQuestions
   ],
   imports: [
     BrowserModule,
@@ -49,7 +58,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Settings,
     ModalAvatar,
     ModalStatus,
-    ModalPassword
+    ModalPassword,
+    MyQuestions,
+    AllMyQuestions,
+    ApprovedQuestions,
+    NotApprovedQuestions
   ],
   providers: [
     StatusBar,

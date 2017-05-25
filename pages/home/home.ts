@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, MenuController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Login } from '../login/login';
 
@@ -9,11 +9,12 @@ import { Login } from '../login/login';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public menu: MenuController) {
 
   }
 
   ionViewDidLoad() {
+    this.menu.swipeEnable(true,'menu');
     if(this.navParams.get('through')){
       this.navCtrl.push(this.navParams.get('component'));
     }

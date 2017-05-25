@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
     <ion-header>
       <ion-toolbar>
         <ion-title>
-          Change your avatar
+          Avatar
         </ion-title>
       </ion-toolbar>
     </ion-header>

@@ -46,7 +46,6 @@ export class Login {
           this.storage.set('loginStatus', data[0].status);
           this.storage.set('loginAvatar', data[0].avatar);
           this.storage.set('auth', true);
-          this.menu.swipeEnable(true,'menu');
           this.navCtrl.setRoot(HomePage);
         } else this.showError("Incorrect username or password.");
       }

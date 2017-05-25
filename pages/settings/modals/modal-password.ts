@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
     <ion-header>
       <ion-toolbar>
         <ion-title>
-          Change your password
+          Password
         </ion-title>
       </ion-toolbar>
     </ion-header>

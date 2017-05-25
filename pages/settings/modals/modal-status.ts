@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
     <ion-header>
       <ion-toolbar>
         <ion-title>
-          Change your status
+          Status
         </ion-title>
       </ion-toolbar>
     </ion-header>
@@ -33,7 +33,7 @@ import 'rxjs/add/operator/map';
 export class ModalStatus {
   status: string;
 
-  constructor(public params: NavParams, public viewCtrl: ViewController, public storage: Storage, 
+  constructor(public params: NavParams, public viewCtrl: ViewController, public storage: Storage,
               public http: Http, public toastCtrl: ToastController) {
 
   }

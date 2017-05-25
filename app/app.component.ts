@@ -9,6 +9,7 @@ import { Login } from '../pages/login/login';
 import { FriendsPage } from '../pages/friends/friends';
 import { RankingPage } from '../pages/ranking/ranking';
 import { Settings } from '../pages/settings/settings';
+import { MyQuestions } from '../pages/my-questions/my-questions';
 
 
 @Component({
@@ -51,6 +52,7 @@ export class MyApp {
       { title: 'Home', component: HomePage, isHome : true },
       { title: 'Friends', component: FriendsPage, isHome: false },
       { title: 'Ranking', component: RankingPage, isHome: false },
+      { title: 'My questions', component: MyQuestions, isHome: false},
       { title: 'Settings', component: Settings, isHome: false}
     ];
   }
