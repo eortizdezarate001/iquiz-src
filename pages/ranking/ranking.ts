@@ -24,7 +24,7 @@ export class RankingPage {
 			if(auth === false)
 				this.navCtrl.setRoot(Login);
 		});
-		console.log('ionViewDidLoad RankingPage');
+		//console.log('ionViewDidLoad RankingPage');
 		this.getAllRanking();
 	}
 

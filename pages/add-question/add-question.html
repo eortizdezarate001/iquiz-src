@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Add Question</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+<form (ngSubmit)="addQuestion()" #questForm="ngForm">
+	<h5>Question:</h5>
+	<ion-item>
+		<ion-input type="text" name="question" [(ngModel)]="quesData.question" required></ion-input>
+	</ion-item>
+
+	<h5>Correct answer:</h5>
+	<ion-item>
+		<ion-input type="text" name="correctAns" [(ngModel)]="quesData.correctAns" required></ion-input>
+	</ion-item>
+
+	<h5>Wrong answer 1:</h5>
+	<ion-item>
+		<ion-input type="text" name="wrong1" [(ngModel)]="quesData.wrong1" required></ion-input>
+	</ion-item>
+
+	<h5>Wrong answer 2:</h5>
+	<ion-item>
+		<ion-input type="text" name="wrong2" [(ngModel)]="quesData.wrong2" required></ion-input>
+	</ion-item>
+
+	<h5>Wrong answer 3:</h5>
+	<ion-item>
+		<ion-input type="text" name="wrong3" [(ngModel)]="quesData.wrong3" required></ion-input>
+	</ion-item>
+
+
+	<ion-list>
+	  <ion-item>
+	  <ion-label>Category</ion-label>
+	    <ion-select [(ngModel)]="quesData.category" name="category">
+	    	<ion-option value="Art">Art</ion-option>
+	    	<ion-option value="Entertainment">Entertainment</ion-option>
+	    	<ion-option value="Geography">Geography</ion-option>
+	    	<ion-option value="History">History</ion-option>
+	      	<ion-option value="Science">Science</ion-option>
+	      	<ion-option value="Sports">Sports</ion-option>
+	    </ion-select>
+	  </ion-item>
+	</ion-list>
+
+	<button ion-button block type="submit" [disabled]="!questForm.form.valid">Save question</button>
+	<button ion-button block color="danger" type="reset">Reset</button>
+
+</form>
+
+</ion-content>

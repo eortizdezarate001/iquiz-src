@@ -128,7 +128,7 @@ export class AllMyQuestions {
     .map(res => res.json())
     .subscribe(data => {
       console.log(data);
-      if(data.message = "success"){
+      if(data.message === "success"){
 				let toast = this.toastCtrl.create({
 					message: "Your question was deleted successfully.",
 					duration: 3000

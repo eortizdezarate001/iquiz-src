@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, MenuController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Login } from '../login/login';
+import { SelectCategoryPage } from '../select-category/select-category';
 
 @Component({
   selector: 'page-home',
@@ -22,6 +23,10 @@ export class HomePage {
       if(auth === false)
         this.navCtrl.setRoot(Login);
     });
+  }
+
+  startPlaying(){
+    this.navCtrl.setRoot(SelectCategoryPage);
   }
 
 

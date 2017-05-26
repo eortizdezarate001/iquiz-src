@@ -11,6 +11,11 @@ import { FriendsPage } from '../pages/friends/friends';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { RankingPage } from '../pages/ranking/ranking';
 
+import { SelectCategoryPage } from '../pages/select-category/select-category';
+import { QuestionPage } from '../pages/question/question';
+import { AddQuestionPage } from '../pages/add-question/add-question';
+import { FinishPage } from '../pages/finish/finish';
+
 import { Settings } from '../pages/settings/settings';
 import { ModalAvatar } from '../pages/settings/modals/modal-avatar';
 import { ModalStatus } from '../pages/settings/modals/modal-status';
@@ -32,6 +37,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SignUpPage,
     FriendsPage,
     RankingPage,
+    SelectCategoryPage,
+    QuestionPage,
+    AddQuestionPage,
+    FinishPage,
     Settings,
     ModalAvatar,
     ModalStatus,
@@ -55,6 +64,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SignUpPage,
     FriendsPage,
     RankingPage,
+    SelectCategoryPage,
+    QuestionPage,
+    AddQuestionPage,
+    FinishPage,
     Settings,
     ModalAvatar,
     ModalStatus,

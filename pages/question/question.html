@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Question {{quesNum}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+<ion-card>
+  <ion-card-content>
+  	{{question}}
+  </ion-card-content>
+</ion-card>
+	<br/>
+	<button [ngClass]="btnDisabled" ion-button block [color]="myColor[0]" (click)="check(0)">{{answers[0]}}</button>
+	<button [ngClass]="btnDisabled" ion-button block [color]="myColor[1]" (click)="check(1)">{{answers[1]}}</button>
+	<button [ngClass]="btnDisabled" ion-button block [color]="myColor[2]" (click)="check(2)">{{answers[2]}}</button>
+	<button [ngClass]="btnDisabled" ion-button block [color]="myColor[3]" (click)="check(3)">{{answers[3]}}</button>
+	<br/>
+	<br/>
+	<button ion-button color="secondary" name="continue" [disabled]="isDisabled" (click)="nextQuestion()" block>Continue</button>
+
+</ion-content>

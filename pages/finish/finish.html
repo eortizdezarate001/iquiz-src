@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Finish</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  	<ion-item>
+		<ion-icon name="star" item-left></ion-icon>
+  		Earned points: {{unekoPuntuak}}
+  	</ion-item>
+ 	<ion-item>
+		<ion-icon name="star" item-left></ion-icon>
+  		Total points: {{puntuTotalak}}
+	</ion-item>
+	<br/><br/>
+	<button ion-button color="danger" (click)="exit()" block>Exit</button>
+
+</ion-content>

@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Select a Category</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding class="card-background-page">
+	<div align="center">
+		<h1>Question: {{index}}/10</h1>
+	</div>
+	<ion-list>
+  		<ion-item>
+    		<ion-icon name="star" item-left></ion-icon>
+      		Current points: {{unekoPuntuak}}
+  		</ion-item>
+	</ion-list>
+	<ion-card *ngIf="category === 'Geography'">
+	    <img src="assets/img/Geography.png"/>
+	    <div class="card-title">Geography</div>
+	    <div class="card-subtitle">Questions about the world</div>
+  	</ion-card>
+
+  	<ion-card *ngIf="category === 'History'">
+	    <img src="assets/img/History.jpg"/>
+	    <div class="card-title">History</div>
+	    <div class="card-subtitle">Questions about the world</div>
+  	</ion-card>
+
+  	<ion-card *ngIf="category === 'Art'">
+	    <img src="assets/img/Art.jpg"/>
+	    <div class="card-title">Art</div>
+	    <div class="card-subtitle">Questions about the world</div>
+  	</ion-card>
+
+  	<ion-card *ngIf="category === 'Entertainment'">
+	    <img src="assets/img/Entertainment.jpg"/>
+	    <div class="card-title">Entertainment</div>
+	    <div class="card-subtitle">Questions about the world</div>
+  	</ion-card>
+
+  	<ion-card *ngIf="category === 'Sports'">
+	    <img src="assets/img/Sports.jpg"/>
+	    <div class="card-title">Sports</div>
+	    <div class="card-subtitle">Questions about sports</div>
+  	</ion-card>
+
+  	<ion-card *ngIf="category === 'Science'">
+	    <img src="assets/img/Science.jpg"/>
+	    <div class="card-title">Science</div>
+	    <div class="card-subtitle">Questions about atoms</div>
+  	</ion-card>
+
+  	<table width="100%">
+		<tr>
+			<td width="50%">
+				<button ion-button color="danger" (click)="doConfirm()" block>Exit</button>
+			</td>
+			<td width="50%">
+				<button ion-button block (click) = 'ansQuest()'>Start</button>
+			</td>
+		</tr>
+	</table>
+</ion-content>

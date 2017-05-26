@@ -24,7 +24,7 @@ export class FriendsPage {
 			if(auth === false)
 				this.navCtrl.setRoot(Login);
 		});
-		console.log('ionViewDidLoad FriendsPage');
+		//console.log('ionViewDidLoad FriendsPage');
 		this.getAllFriends();
 	}
 
