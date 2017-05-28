@@ -1,4 +1,4 @@
-<ion-menu [content]="content" id="menu" persistent="true" (ionOpen)="update()">
+<ion-menu [content]="content" id="menu" persistent="true">
   <ion-header>
     <br>
     <ion-avatar item-center>
@@ -9,9 +9,14 @@
 
   <ion-content>
     <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
+      <div *ngFor="let p of pages">
+        <button menuClose ion-item *ngIf="!p.admin" (click)="openPage(p)">
+            {{p.title}}
+        </button>
+        <button menuClose ion-item *ngIf="p.admin && username==='admin'" (click)="openPage(p)">
+            {{p.title}}
+        </button>
+      </div>
       <button menuClose ion-item (click)="logout()">Log out</button>
     </ion-list>
   </ion-content>

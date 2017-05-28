@@ -69,13 +69,18 @@ export class ApprovedQuestions {
     {name: "Geography", data: []},
     {name: "History", data: []},
     {name: "Art", data: []},
-    {name: "Sports", data: []}
+    {name: "Sports", data: []},
+    {name: "Science", data: []}
   ];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public http: Http, public toastCtrl  : ToastController) {
   }
 
   ionViewWillEnter(){
+    this.getQuestions();
+  }
+
+  ionViewWillLeave() {
     this.getQuestions();
   }
 
@@ -115,6 +120,9 @@ export class ApprovedQuestions {
                 break;
               case 'Sports':
                 this.questions[4].data.push(question);
+                break;
+              case 'Science':
+                this.questions[5].data.push(question);
                 break;
             }
           }
@@ -175,6 +183,12 @@ export class ApprovedQuestions {
         let index4 = this.questions[4].data.indexOf(question);
     		if(index4 > -1){
     			this.questions[4].data.splice(index4, 1);
+    		}
+        break;
+      case 'Science':
+        let index5 = this.questions[5].data.indexOf(question);
+    		if(index5 > -1){
+    			this.questions[5].data.splice(index5, 1);
     		}
         break;
     }

@@ -3,66 +3,15 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { Storage } from '@ionic/storage';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-
+import { Login } from '../login/login';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
-  selector: 'page-not-approved-questions',
-  template: `
-    <ion-header>
-      <ion-navbar hideBackButton>
-        <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </button>
-        <ion-title>Not approved questions</ion-title>
-      </ion-navbar>
-    </ion-header>
-
-    <ion-content>
-    <ion-list>
-      <div *ngFor="let category of questions">
-        <ion-item-divider sticky *ngIf="category.data.length !== 0">{{category.name}}</ion-item-divider>
-          <ion-card  *ngFor="let q of category.data">
-            <ion-card-content>
-              <h2>{{q.question}}</h2>
-              <ion-list inset no-lines>
-                <ion-item>
-                  <ion-icon name="checkmark" color="secondary" item-left></ion-icon>
-                  {{q.correct}}
-                </ion-item>
-                <ion-item>
-                  <ion-icon name="close" color="danger" item-left></ion-icon>
-                  {{q.incorrect1}}
-                </ion-item>
-                <ion-item>
-                  <ion-icon name="close" color="danger" item-left></ion-icon>
-                  {{q.incorrect2}}
-                </ion-item>
-                <ion-item>
-                  <ion-icon name="close" color="danger" item-left></ion-icon>
-                  {{q.incorrect3}}
-                </ion-item>
-              </ion-list>
-            </ion-card-content>
-            <ion-grid>
-              <ion-row center>
-                <ion-col>
-                </ion-col>
-                <ion-col>
-                  <button ion-button clear color="danger" (click)="delete(q)">
-                    <ion-icon name="trash"></ion-icon>
-                    &nbsp; Delete
-                  </button>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-card>
-        </div>
-      </ion-list>
-    </ion-content>
-  `
+  selector: 'page-approve-question',
+  templateUrl: 'approve-question.html',
 })
-export class NotApprovedQuestions {
+export class ApproveQuestion {
 
   questions = [
     {name: "Entertainment", data: []},
@@ -73,10 +22,20 @@ export class NotApprovedQuestions {
     {name: "Science", data: []}
   ];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public http: Http, public toastCtrl  : ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public http: Http, public toastCtrl: ToastController) {
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
+    this.storage.get('auth').then((auth) => {
+			if(auth === false)
+				this.navCtrl.setRoot(Login);
+		});
+    this.storage.get('loginUsername').then((user) => {
+      if(user !== 'admin'){
+        this.navCtrl.setRoot(HomePage);
+      }
+    });
+
     this.getQuestions();
   }
 
@@ -85,17 +44,20 @@ export class NotApprovedQuestions {
   }
 
   getQuestions() {
-    this.storage.get('loginUsername').then((user) => {
-      this.http.get('http://iquiz.x10.bz/get-question.php?key=myQuestions-notApproved&username=' + user)
-      .map(res => res.json())
-      .subscribe(data => {
-        if(data.length !== 0){
+    this.http.get('http://iquiz.x10.bz/get-question.php?key=newQuestions')
+    .map(res => res.json())
+    .subscribe(data => {
+      if(data.length !== 0){
 
-          for(let ques of this.questions){
-            ques.data = [];
-          }
+        for(let ques of this.questions){
+          ques.data = [];
+        }
 
-          for(let q of data){
+        for(let q of data){
+
+          this.http.get('http://iquiz.x10.bz/get-user.php?key=username&user=' + q.author)
+          .map(res => res.json())
+          .subscribe(user => {
             let question = {
               question: q.question,
               correct: q.correctAnswer,
@@ -103,7 +65,9 @@ export class NotApprovedQuestions {
               incorrect2: q.incorrectTwo,
               incorrect3: q.incorrectThree,
               category: q.category,
-              id: q.id
+              id: q.id,
+              author: q.author,
+              avatar: user[0].avatar
             };
             switch (q.category){
               case 'Entertainment':
@@ -125,9 +89,30 @@ export class NotApprovedQuestions {
                 this.questions[5].data.push(question);
                 break;
             }
-          }
+          });
         }
-      });
+      }
+    });
+  }
+
+  approve(question){
+    this.http.get("http://iquiz.x10.bz/manage-question.php?key=approve&id=" + question.id)
+    .map(res => res.json())
+    .subscribe(data => {
+      if(data.message === "success"){
+				let toast = this.toastCtrl.create({
+					message: "The question was approved successfully.",
+					duration: 3000
+				});
+				toast.present();
+				this.removeQuestion(question);
+			} else{
+				let toast = this.toastCtrl.create({
+					message: "The question could not be approved.",
+					duration: 3000
+				});
+				toast.present();
+			}
     });
   }
 
@@ -135,7 +120,6 @@ export class NotApprovedQuestions {
     this.http.get("http://iquiz.x10.bz/manage-question.php?key=delete&id=" + question.id)
     .map(res => res.json())
     .subscribe(data => {
-      console.log(data);
       if(data.message === "success"){
 				let toast = this.toastCtrl.create({
 					message: "Your question was deleted successfully.",
@@ -193,4 +177,5 @@ export class NotApprovedQuestions {
         break;
     }
   }
+
 }

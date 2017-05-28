@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController } from 'ionic-angular';
+import { NavController, NavParams, MenuController, Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Login } from '../login/login';
 import { SelectCategoryPage } from '../select-category/select-category';
@@ -10,7 +10,7 @@ import { SelectCategoryPage } from '../select-category/select-category';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public menu: MenuController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public menu: MenuController, public event: Events) {
 
   }
 
@@ -23,6 +23,11 @@ export class HomePage {
       if(auth === false)
         this.navCtrl.setRoot(Login);
     });
+    this.event.publish('updateMenu');
+  }
+
+  ionViewWillEnter() {
+    this.event.publish('updateMenu');
   }
 
   startPlaying(){

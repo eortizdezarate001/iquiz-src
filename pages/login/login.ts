@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Loading, AlertController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Loading, AlertController, MenuController, Events } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
@@ -19,7 +19,7 @@ export class Login {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public loadingCtrl: LoadingController, public alertCtrl: AlertController,
-              public http: Http, public storage: Storage, public menu: MenuController) {
+              public http: Http, public storage: Storage, public menu: MenuController, public event: Events) {
 
   }
 
@@ -46,6 +46,7 @@ export class Login {
           this.storage.set('loginStatus', data[0].status);
           this.storage.set('loginAvatar', data[0].avatar);
           this.storage.set('auth', true);
+          this.event.publish('updateMenu');
           this.navCtrl.setRoot(HomePage);
         } else this.showError("Incorrect username or password.");
       }

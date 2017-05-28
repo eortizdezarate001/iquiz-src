@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, ViewController, ToastController } from 'ionic-angular';
+import { NavParams, ViewController, ToastController, Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -86,7 +86,7 @@ export class ModalAvatar {
   ]
 
   constructor(public params: NavParams, public viewCtrl: ViewController, public storage: Storage,
-              public http: Http, public toastCtrl: ToastController) {
+              public http: Http, public toastCtrl: ToastController, public event: Events) {
 
   }
 
@@ -120,6 +120,7 @@ export class ModalAvatar {
   						duration: 3000
   					});
   					toast.present();
+            this.event.publish('updateMenu');
             this.viewCtrl.dismiss();
           }
         });

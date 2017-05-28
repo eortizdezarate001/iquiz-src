@@ -18,7 +18,7 @@ export class AddQuestionPage {
 	}
 
 	ionViewDidLoad() {
-		console.log('ionViewDidLoad AddQuestionPage');
+		//console.log('ionViewDidLoad AddQuestionPage');
 	}
 
 	addQuestion() {

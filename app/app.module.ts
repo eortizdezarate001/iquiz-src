@@ -26,6 +26,8 @@ import { AllMyQuestions } from '../pages/my-questions/tabs/all';
 import { ApprovedQuestions } from '../pages/my-questions/tabs/approved';
 import { NotApprovedQuestions } from '../pages/my-questions/tabs/notapproved';
 
+import { ApproveQuestion } from '../pages/approve-question/approve-question';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -48,7 +50,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyQuestions,
     AllMyQuestions,
     ApprovedQuestions,
-    NotApprovedQuestions
+    NotApprovedQuestions,
+    ApproveQuestion
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyQuestions,
     AllMyQuestions,
     ApprovedQuestions,
-    NotApprovedQuestions
+    NotApprovedQuestions,
+    ApproveQuestion
   ],
   providers: [
     StatusBar,

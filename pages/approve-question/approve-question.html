@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Approve questions</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+<ion-list>
+  <div *ngFor="let category of questions">
+    <ion-item-divider sticky *ngIf="category.data.length !== 0">{{category.name}}</ion-item-divider>
+      <ion-card  *ngFor="let q of category.data">
+        <ion-card-header>
+          <ion-item>
+            <ion-avatar item-left>
+              <img src="{{q.avatar}}">
+            </ion-avatar>
+            <h2>{{q.author}}</h2>
+          </ion-item>
+        </ion-card-header>
+
+        <ion-card-content>
+          <h2>{{q.question}}</h2>
+          <ion-list inset no-lines>
+            <ion-item>
+              <ion-icon name="checkmark" color="secondary" item-left></ion-icon>
+              {{q.correct}}
+            </ion-item>
+            <ion-item>
+              <ion-icon name="close" color="danger" item-left></ion-icon>
+              {{q.incorrect1}}
+            </ion-item>
+            <ion-item>
+              <ion-icon name="close" color="danger" item-left></ion-icon>
+              {{q.incorrect2}}
+            </ion-item>
+            <ion-item>
+              <ion-icon name="close" color="danger" item-left></ion-icon>
+              {{q.incorrect3}}
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+        <ion-grid>
+          <ion-row center>
+            <ion-col>
+              <button ion-button clear color="danger" (click)="delete(q)">
+                <ion-icon name="trash"></ion-icon>
+                &nbsp; Delete
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button clear color="secondary" (click)="approve(q)">
+                <ion-icon name="checkmark"></ion-icon>
+                &nbsp; Approve
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </div>
+  </ion-list>
+</ion-content>

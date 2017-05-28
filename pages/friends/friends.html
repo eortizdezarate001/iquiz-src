@@ -17,19 +17,19 @@
 <ion-list>
 	<ion-item-sliding *ngFor ="let friend of friends">
 		<ion-item>
-	      <ion-avatar item-left>
-	        <img src="{{friend.avatar}}">
-	      </ion-avatar>
-	      <h2>{{friend.username}}</h2>
-	      <h3>{{friend.points}} points</h3>
-	      <p>{{friend.status}}</p>
-	    </ion-item>
-	    <ion-item-options side="right">
-	      <button ion-button color="danger" (click)="deleteFriend(friend)">
-	        <ion-icon name="trash"></ion-icon>
-	        Delete friend
-	      </button>
-	    </ion-item-options>
+      <ion-avatar item-left>
+        <img src="{{friend.avatar}}">
+      </ion-avatar>
+      <h2>{{friend.username}}</h2>
+      <h3>{{friend.points}} points</h3>
+      <p>{{friend.status}}</p>
+    </ion-item>
+    <ion-item-options side="right">
+      <button ion-button color="danger" (click)="deleteFriend(friend)">
+        <ion-icon name="trash"></ion-icon>
+        Delete friend
+      </button>
+    </ion-item-options>
 	</ion-item-sliding>
 </ion-list>
 
