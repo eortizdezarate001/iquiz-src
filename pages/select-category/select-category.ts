@@ -20,7 +20,7 @@ export class SelectCategoryPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public storage: Storage, public http: Http, public toastCtrl : ToastController, public menu: MenuController) {
   }
 
-  ionViewWillLoad() {
+  ionViewWillEnter() {
     //console.log('ionViewDidLoad SelectCategoryPage');
     this.menu.swipeEnable(false,'menu');
     //Guardar 10 preguntas

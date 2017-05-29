@@ -25,26 +25,26 @@ export class QuestionPage {
 	constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public storage: Storage, public http: Http, public toastCtrl : ToastController) {
 	}
 
-	ionViewDidLoad() {
+	ionViewDidEnter() {
 
 			this.storage.get('questionIndex').then((indize) => {
-			if(indize > 10){
-        this.navCtrl.setRoot(FinishPage);
-			} else {
-				this.galZenb = indize;
-			}
-		});
-		this.storage.get('quiz').then((test) => {
-			let uneko: number = this.galZenb -1;
-			this.unekoGal = test[uneko];
-			//console.log(this.unekoGal);
-			this.question = test[uneko].question;
-			let list: any[] = [test[uneko].correctAnswer,test[uneko].incorrectOne, test[uneko].incorrectTwo, test[uneko].incorrectThree];
-			this.shuffle(list);
-			for(var _i = 0; _i<4; _i++){
-				this.answers[_i] = list[_i];
-			}
-		});
+				if(indize > 10){
+	        this.navCtrl.setRoot(FinishPage);
+				} else {
+					this.galZenb = indize;
+				}
+			});
+			this.storage.get('quiz').then((test) => {
+				let uneko: number = this.galZenb -1;
+				this.unekoGal = test[uneko];
+				//console.log(this.unekoGal);
+				this.question = test[uneko].question;
+				let list: any[] = [test[uneko].correctAnswer,test[uneko].incorrectOne, test[uneko].incorrectTwo, test[uneko].incorrectThree];
+				this.shuffle(list);
+				for(var _i = 0; _i<4; _i++){
+					this.answers[_i] = list[_i];
+				}
+			});
 	}
 
 	check(i){
