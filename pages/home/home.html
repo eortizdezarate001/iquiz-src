@@ -6,12 +6,40 @@
     <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
+<ion-content padding class="card-background-page">
+  <h1 align="center">Welcome to iQuiz!</h1>
+  <ion-slides pager style="max-height:220px;">
+    <ion-slide>
+      <ion-card>
+        <img class="back" src="assets/img/factory.jpg"/>
+        <div class="card-title">Question Factory</div>
+        <div class="card-subtitle">Create your own questions and be part of the comunity</div>
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card>
+        <img class="back" src="assets/img/create.jpg"/>
+        <div class="card-title">Very Updated</div>
+        <div class="card-subtitle">Thanks to our comunity there are lots of new questions everyday</div>
+      </ion-card>
+    </ion-slide>
+        <ion-slide>
+      <ion-card>
+        <img class="back" src="assets/img/splash.png"/>
+        <div class="card-title">A new version</div>
+        <div class="card-subtitle">The mobile version arrives to your smartphone and tablet</div>
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card>
+        <img class="back" src="assets/img/middle.jpg"/>
+        <div class="card-title">Your Kingdom</div>
+        <div class="card-subtitle">Are you an expert about something? Challenge your friends!</div>
+      </ion-card>
+    </ion-slide>
 
-<ion-content padding>
-  <h2>Welcome to iQuiz!</h2>
-  <p>
-    ...
-  </p>
-  <button ion-button block (click)='startPlaying()'>Play</button>
+
+  </ion-slides>
+  <button ion-button block large (click)='startPlaying()'>Play</button>
 
 </ion-content>
