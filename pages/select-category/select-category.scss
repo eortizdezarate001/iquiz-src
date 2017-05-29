@@ -3,6 +3,7 @@
   ion-card {
     position: relative;
     text-align: center;
+    background:black;
   }
 
   .card-title {
@@ -20,6 +21,11 @@
     top: 52%;
     width: 100%;
     color: #fff;
+  }
+
+  .back {
+    opacity: 0.8;
+
   }
 
 }
